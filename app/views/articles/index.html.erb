@@ -1,0 +1,29 @@
+<h2 class="text-center mt-4">Articles</h2>
+<% if @articles.length > 0 %>
+    <table class="table table-bordered table-dark mt-4">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Content</th>
+                <th>Created At</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @articles.each do |article| %>
+                <tr>
+                    <td><%= link_to article.title, article_path(article) %></td>
+                    <td><%= article.content %></td>
+                    <td><%= article.created_at.to_date %></td>
+                    <td>
+                        <%= link_to "Edit", edit_article_path(article), class: "btn btn-success fas fa-edit" %> |
+                        <%= link_to "Delete", article_path(article), method: :delete, class: "btn btn-danger fas fa-trash-alt", data: {confirm: "Are you sure?"} %>
+                    </td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+<% else %>
+    <h3>There is no Articles!</h3>
+<% end %>
+<%= link_to 'New Article', new_article_path, class: "btn btn-info" %>

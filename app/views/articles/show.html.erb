@@ -1,0 +1,27 @@
+<h2 class="text-center mt-4">Articles</h2>
+<table class="table table-bordered table-dark mt-2">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Content</th>
+            <th>Created At</th>
+            <th>Votes</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><%= @article.title%></td>
+            <td><%= @article.content %></td>
+            <td><%= @article.created_at.to_date %></td>
+            <td><%= pluralize(@article.votes.count, "Vote")%></td>
+            <td>
+                <%= link_to '+1 Vote', upvote_article_path(@article), method: :post, class: "btn btn-primary" %>
+                <% if @article.votes.count > 0%>
+                    <%= link_to '-1 Vote', downvote_article_path(@article), method: :delete, class: "btn btn-danger" %>
+                <% end %>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<%= link_to 'Back', articles_path, class: "btn btn-warning" %>
